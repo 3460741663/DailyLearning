@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .contain{
+      width: 1200px;
+      height: 600px;
+      background-color: yellow;
+      text-align: center;
+      /* line-height: 600px; */
+      /* display: flex;
+      /* flex-direction: column; */
+      /* justify-content: center; */
+      display: table-cell;
+      vertical-align: middle;
+    }
+    .inner{
+      width: 100px;
+      height: 200px;
+      background-color: aqua;
+      margin: 0 auto;
+      display: inline-block;
+    }
+    img{
+      vertical-align: middle;
+    }
+    img:hover{
+    content: url('./3.14_HTTP、DNS、CDN.png');
+    }
+    button {  /*改掉button默认样式就好了,不需要居中处理*/
+    height: 150px;
+    width: 200px;
+    outline: none;  
+    border: none;
+}
+.son{
+    display: inline-block; /*button自带text-align: center,改为行内水平居中生效*/
+}
+
+
+dot {
+    display: inline-block; 
+    height: 1em;
+    line-height: 1;
+    text-align: left;
+    vertical-align: -.25em;
+    overflow: hidden;
+}
+dot::before {
+    display: block;
+    content: '...\A..\A.';
+    white-space: pre-wrap;
+    animation: dot 3s infinite step-start both;
+}
+@keyframes dot {
+    33% { transform: translateY(-2em); }
+    66% { transform: translateY(-1em); }
+}
+
+  </style>
+</head>
+<body>
+  <!-- <div class="contain">
+    <img src="./3.15_帧任务.jpg" alt="图片加载失败" title="我是图片">
+  </div> -->
+  <!-- <button>
+    <div class="son">我是button内部的</div>
+  </button> -->
+  <!-- <div class="parent">
+    <div class="son">
+
+    </div>
+  </div> -->
+  <div class="contain">正在加载中<dot>...</dot></div>
+</body>
+</html>

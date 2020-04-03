@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="contain">
+    <ul id="child">
+      <li><span>1</span></li>
+      <li><span>2</span></li>
+      <li><span>3</span></li>
+      <li><span>4</span></li>
+      <li><span>5</span></li>
+      <li><span>6</span></li>
+      <li><span>7</span></li>
+      <li><span>8</span></li>
+      <li><span>9</span></li>
+      <li><span>10</span></li>
+    </ul>
+  </div>
+  <script>
+      const ul = document.getElementById('child');
+      const contain = document.getElementById('contain')
+      contain.addEventListener('click', (event) =>{
+        console.log(this,'___&&&')
+      },true)
+      ul.addEventListener('click', function() {
+        event.stopPropagation();
+        // console.log(this);
+        // console.log(event.target, '&&&&&&')
+        console.log(event.currentTarget,'____***+++')
+      },true)
+  </script>
+</body>
+</html>

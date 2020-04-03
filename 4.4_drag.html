@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    *{
+      padding: 0;
+      margin: 0;
+      border: 0;
+    }
+    #contain{
+      width: 100vw;
+      height: 100vh;
+      background-color: yellow;
+    }
+    #cube{
+      width: 50px;
+      height: 50px;
+      background-color: aqua;
+      position: absolute;
+    }
+  </style>
+</head>
+<body>
+  <div id="contain">
+    <div id="cube" draggable="true" ></div>
+  </div>
+  <script>
+    const dragCube = document.getElementById('cube');
+    const targetEle =document.getElementById('contain')
+    dragCube.ondragstart = dragStart;
+    dragCube.ondrag = drag;
+    dragCube.ondragend = dragEnd;
+    targetEle.ondragenter = enter;
+    targetEle.ondragover = over;
+
+    function dragStart (e){
+      console.log('元素被开始拖动的瞬间', e)
+    }
+    function drag(e) {
+      // console.log('元素被拖动时反复触发', e);
+      // 跟随跟随移动,即设置动态设置它的位置
+      // e.preventDefault();
+      
+      // dragCube.style.left = e.clientX +"px";
+      // dragCube.style.top = e.clientY + 'px';
+    }
+    function dragEnd (e) {
+      dragCube.style.left = e.clientX +"px";
+      dragCube.style.top = e.clientY + 'px';
+    }
+
+    function enter(e){
+      e.preventDefault();
+      
+    }
+    function over(e){
+      e.preventDefault()
+    }
+    // console.log(dragCube)
+  </script>
+</body>
+</html>
+
+
+<!-- 
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title></title>    
+        <style>
+            div{
+                width: 200px;
+                height: 130px;
+                background: red; 
+                position: absolute;
+                left: 20px;
+                }
+        </style>
+    </head>
+    
+    <body>
+        <input type="button" value="按钮1" id="btn"/>
+        <input type="button" value="按钮2" id="btn2"/>
+        <div id="dv"> </div>        
+    </body>  
+    <script>
+      document.getElementById("btn").onclick=function(){
+          animate(document.getElementById("dv"),400);
+          
+      };            
+      document.getElementById("btn2").onclick=function(){
+          animate(document.getElementById("dv"),1600);
+     };
+      //把任意元素移动到指定的目标位置
+      function animate(element,target){
+          clearInterval(element.timer1);
+          element.timer1=setInterval(function(){//element是一个对象，对象点出来的属性有且只有一个，避免多次点击按钮产生多个定时器
+              var current=element.offsetLeft;    //获取当前位置，数字类型，没有px。
+              //不可以用element.style.left，因为该写法只能获取到行内样式，不能获取到<style></style>标签内的样式
+              var step=10;//每次移动的距离
+              step=current<target?step:-step;//step的正负表示了向左或是向右移动
+              current+=step;    //计算移动到的位置，数字类型，没有px                
+              if(Math.abs(target-current)>Math.abs(step)){//当离目标位置的距离大于一步移动的距离
+                  element.style.left=current+"px";//移动
+             
+              }else{//当间距小于一步的距离，则清理定时器，把元素直接拿到目标位置
+                  clearInterval(element.timer1);
+                  element.style.left=target+"px";
+                  
+             }
+          },20);
+      }
+  </script>  
+</html> -->

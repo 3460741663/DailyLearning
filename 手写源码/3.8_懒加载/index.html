@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    img {
+      /* display: block; */
+      margin-bottom: 50px;
+      height: 200px;
+    }
+  </style>
+</head>
+
+<body>
+  <div>
+    <img src="/img/loading.jpg" data-src="/img/load_img (1).jpg" alt="">
+    <img src="/img/loading.jpg" data-src="/img/load_img (2).jpg" alt="">
+    <img src="/img/loading.jpg" data-src="/img/load_img (3).jpg" alt="">
+    <img src="/img/loading.jpg" data-src="/img/load_img (4).jpg" alt="">
+    <img src="/img/loading.jpg" data-src="/img/load_img (5).jpg" alt="">
+    <img src="/img/loading.jpg" data-src="/img/load_img (6).jpg" alt="">
+    <img src="/img/loading.jpg" data-src="/img/load_img (7).jpg" alt="">
+    <img src="/img/loading.jpg" data-src="/img/load_img (8).jpg" alt="">
+    <img src="/img/loading.jpg" data-src="/img/load_img (9).jpg" alt="">
+    <img src="/img/loading.jpg" data-src="/img/load_img (1).jpg" alt="">
+    <img src="/img/loading.jpg" data-src="/img/load_img (2).jpg" alt="">
+    <img src="/img/loading.jpg" data-src="/img/load_img (3).jpg" alt="">
+    <img src="/img/loading.jpg" data-src="/img/load_img (1).jpg" alt="">
+    <img src="/img/loading.jpg" data-src="/img/load_img (2).jpg" alt="">
+    <img src="/img/loading.jpg" data-src="/img/load_img (3).jpg" alt="">
+    <img src="/img/loading.jpg" data-src="/img/load_img (4).jpg" alt="">
+    <img src="/img/loading.jpg" data-src="/img/load_img (5).jpg" alt="">
+    <img src="/img/loading.jpg" data-src="/img/load_img (6).jpg" alt="">
+    <img src="/img/loading.jpg" data-src="/img/load_img (7).jpg" alt="">
+    <img src="/img/loading.jpg" data-src="/img/load_img (8).jpg" alt="">
+    <img src="/img/loading.jpg" data-src="/img/load_img (9).jpg" alt="">
+    <img src="/img/loading.jpg" data-src="/img/load_img (1).jpg" alt="">
+    <img src="/img/loading.jpg" data-src="/img/load_img (2).jpg" alt="">
+    <img src="/img/loading.jpg" data-src="/img/load_img (3).jpg" alt="">
+    <img src="/img/loading.jpg" data-src="/img/load_img (1).jpg" alt="">
+    <img src="/img/loading.jpg" data-src="/img/load_img (2).jpg" alt="">
+    <img src="/img/loading.jpg" data-src="/img/load_img (3).jpg" alt="">
+    <img src="/img/loading.jpg" data-src="/img/load_img (4).jpg" alt="">
+    <img src="/img/loading.jpg" data-src="/img/load_img (5).jpg" alt="">
+    <img src="/img/loading.jpg" data-src="/img/load_img (6).jpg" alt="">
+    <img src="/img/loading.jpg" data-src="/img/load_img (7).jpg" alt="">
+    <img src="/img/loading.jpg" data-src="/img/load_img (8).jpg" alt="">
+    <img src="/img/loading.jpg" data-src="/img/load_img (9).jpg" alt="">
+    <img src="/img/loading.jpg" data-src="/img/load_img (1).jpg" alt="">
+    <img src="/img/loading.jpg" data-src="/img/load_img (2).jpg" alt="">
+    <img src="/img/loading.jpg" data-src="/img/load_img (3).jpg" alt="">
+    <img src="/img/loading.jpg" data-src="/img/load_img (1).jpg" alt="">
+    <img src="/img/loading.jpg" data-src="/img/load_img (2).jpg" alt="">
+    <img src="/img/loading.jpg" data-src="/img/load_img (3).jpg" alt="">
+    <img src="/img/loading.jpg" data-src="/img/load_img (4).jpg" alt="">
+    <img src="/img/loading.jpg" data-src="/img/load_img (5).jpg" alt="">
+    <img src="/img/loading.jpg" data-src="/img/load_img (6).jpg" alt="">
+    <img src="/img/loading.jpg" data-src="/img/load_img (7).jpg" alt="">
+    <img src="/img/loading.jpg" data-src="/img/load_img (8).jpg" alt="">
+    <img src="/img/loading.jpg" data-src="/img/load_img (9).jpg" alt="">
+    <img src="/img/loading.jpg" data-src="/img/load_img (1).jpg" alt="">
+    <img src="/img/loading.jpg" data-src="/img/load_img (2).jpg" alt="">
+    <img src="/img/loading.jpg" data-src="/img/load_img (3).jpg" alt="">
+    <img src="/img/loading.jpg" data-src="/img/load_img (1).jpg" alt="">
+    <img src="/img/loading.jpg" data-src="/img/load_img (2).jpg" alt="">
+  </div>
+  <script>
+    // function loadImages() {
+    //   // 获得视窗的高度
+    //   var seeHeight = document.documentElement.clientHeight;
+    //   // 获得当前向上滚动的距离
+    //   var scrollTop = document.documentElement.scrollTop || document.body.scrollTop
+    //   var images = document.getElementsByTagName('img');
+    //   for(let i = 0; i < images.length; i ++){
+    //     console.log(images[i].offsetTop,'*********')
+    //     // 元素距离顶部的距离<视窗的高度+滚的距离时，说这个元素已经被滑到或者被滑过了，给他替换成本来的图片
+    //     if(images[i].getBoundingClientRect().top < seeHeight + scrollTop && images[i].getBoundingClientRect().bottom > scrollTop){
+    //       images[i].src = images[i].getAttribute('data-src');
+    //     }
+    //   }
+    //   console.log(seeHeight,scrollTop)
+    // }
+    // // 一开始调用一下，在触发scroll之前
+    // loadImages();          //初始化首页的页面图片
+    // window.addEventListener('scroll', loadImages)
+
+
+    // 使用闭包优化一下，让它遍历时不是每次都是0开始
+    // function lazyload() {
+    //   var images = document.getElementsByName('img');
+    //   var len = images.length;
+    //   var n = 0; // 保存图片加载到的位置
+    //   return function () {
+    //     // 获得视窗的高度
+    //     var seeHeight = document.documentElement.clientHeight;
+    //     // 获得当前向上滚动的距离
+    //     var scrollTop = document.documentElement.scrollTop || document.body.scrollTop
+    //     var images = document.getElementsByTagName('img');
+    //     for (let i = n; i < images.length; i++) {
+    //       // 元素距离顶部的距离<视窗的高度+滚的距离时，说这个元素已经被滑到或者被滑过了，给他替换成本来的图片
+    //       if (images[i].offsetTop < seeHeight + scrollTop) {
+    //         // 已经替换的就不用替换了
+    //         if(images[i].getAttribute('src') == '/img/loading.jpg'){
+    //           images[i].src = images[i].getAttribute('data-src');
+    //         }
+    //         n++;
+    //       }
+    //     }
+    //   }
+    // }
+    // let load_img = lazyload();
+    // load_img();
+    // window.addEventListener('scroll',load_img)
+
+
+    // 使用去抖节流优化一下
+    // 滚动事件执行太频繁了,还是加载图片的方法,给浏览器带来很大负担
+    // function throttle(fn, delay, atLeast){
+    //   let timeout = null;
+    //   let last = 0;
+    //   let _this = this;
+    //   return function (...args){
+    //     // 防抖,清除上一次定时器
+    //     clearTimeout(timeout);
+    //     let cur = +new Date();
+    //     if(cur - last > atLeast){
+    //       fn.apply(this, args)
+    //       last = cur
+    //     }else{
+    //       timeout = setTimeout(fn, delay);
+    //     }
+    //   }
+    // }
+
+    // 防抖节流优化
+    // 防抖和节流合作,你要是一直滚动节流会一直刷新你的定时器,但是节流会被触发来加载
+    // function throttle(fn, delay, atleast) {
+    //   var timeout = null,
+    //     startTime = new Date();
+    //   return function () {
+    //     var curTime = new Date();
+    //     clearTimeout(timeout);
+    //     if (curTime - startTime >= atleast) {
+    //       fn();
+    //       startTime = curTime;
+    //     } else {
+    //       timeout = setTimeout(fn, delay);
+    //     }
+    //   }
+    // }
+    // function lazyload() {
+    //   var images = document.getElementsByName('img');
+    //   var len = images.length;
+    //   var n = 0; // 保存图片加载到的位置
+    //   return function () {
+    //     // 获得视窗的高度
+    //     var seeHeight = document.documentElement.clientHeight;
+    //     // 获得当前向上滚动的距离
+    //     var scrollTop = document.documentElement.scrollTop || document.body.scrollTop
+    //     var images = document.getElementsByTagName('img');
+    //     for (let i = n; i < images.length; i++) {
+    //       // 元素距离顶部的距离<视窗的高度+滚的距离时，说这个元素已经被滑到或者被滑过了，给他替换成本来的图片
+    //       if (images[i].offsetTop < seeHeight + scrollTop) {
+    //         // 已经替换的就不用替换了
+    //         if (images[i].getAttribute('src') == '/img/loading.jpg') {
+    //           images[i].src = images[i].getAttribute('data-src');
+    //         }
+    //         n++;
+    //       }
+    //     }
+    //   }
+    // }
+    // let load_img = lazyload();
+    // load_img();
+    // window.addEventListener('scroll', throttle(load_img, 500, 1000))
+
+
+    // 使用IntersectionObserver API
+    function query(selector) {
+      return Array.from(document.querySelectorAll(selector));
+    }
+    var io = new IntersectionObserver(function (items) {
+      items.forEach(function (item) {
+        var target = item.target;
+        if (target.getAttribute('src') == '/img/loading.jpg') {
+          target.src = target.getAttribute('data-src');
+        }
+      })
+    });
+    query('img').forEach(function (item) {
+      io.observe(item);
+    });
+
+
+
+
+  </script>
+</body>
+
+</html>

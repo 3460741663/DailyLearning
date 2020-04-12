@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //new Phaser.Game
+        let Phaser = {};//对象字面量
+        Phaser.Game = function(width,height,selector,callback){
+            console.log('构造函数');
+        }
+        Phaser.Game.prototype.getName = function(){
+            console.log('Game的方法');
+        }
+    </script>
+</body>
+</html>

